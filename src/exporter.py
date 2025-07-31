@@ -30,9 +30,9 @@ download_speed = Gauge('speedtest_download_bits_per_second',
                        'Speedtest current Download Speed in bit/s')
 upload_speed = Gauge('speedtest_upload_bits_per_second',
                      'Speedtest current Upload speed in bits/s')
-download_usage = Counter('speedtest_total_download_mibibytes',
+download_usage = Counter('speedtest_total_download_mebibytes',
                          'Speedtest total data downloaded in MiB')
-upload_usage = Counter('speedtest_total_upload_mibibytes',
+upload_usage = Counter('speedtest_total_upload_mebibytes',
                          'Speedtest total data uploaded in MiB')
 up = Gauge('speedtest_up', 'Speedtest status whether the scrape worked')
 
@@ -44,7 +44,7 @@ cache_until = datetime.datetime.fromtimestamp(0)
 def bytes_to_bits(bytes_per_sec):
     return bytes_per_sec * 8
 
-def bytes_to_mibibytes(bytes):
+def bytes_to_mebibytes(bytes):
     return bytes / 1024 / 1024
 
 def bits_to_megabits(bits_per_sec):
@@ -100,8 +100,8 @@ def runTest():
                 actual_ping = data['ping']['latency']
                 download = bytes_to_bits(data['download']['bandwidth'])
                 upload = bytes_to_bits(data['upload']['bandwidth'])
-                download_size = bytes_to_mibibytes(data['download']['bytes'])
-                upload_size = bytes_to_mibibytes(data['upload']['bytes'])
+                download_size = bytes_to_mebibytes(data['download']['bytes'])
+                upload_size = bytes_to_mebibytes(data['upload']['bytes'])
                 return (actual_server, actual_jitter, actual_ping, download,
                         upload, download_size, upload_size, 1)
 
